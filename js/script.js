@@ -1,4 +1,6 @@
 let locationHistory = [];
+let currentLocation = {};
+let locationInputEl = [];
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -38,7 +40,65 @@ async function initMap() {
         lng: longitudeData,
       }
       locationHistory.push(clickLocation);
+      let currentLocation = clickLocation;
+      console.log(currentLocation);
     });
   }
   
   initMap();
+
+  function handleAddLocation(event){
+
+    var dialog, form,
+ 
+      latitude = $("#latitude"),
+      longitude = $("#longitude"),
+      date = $( "#date" ),
+      allFields = $( [] ).add( latitude ).add( longitude ).add( date );
+ 
+ 
+    function addLocation() {
+        let filledInput = true;
+
+        let locationEntry = {
+            latitude: $('#latitude').val(),
+            longitude: $('#longitude').val(),
+            date: $('#date').val(),
+        };
+        
+        $('#latitude').value = '';
+        $('longitude').value ='';
+        $('#date').value ='';
+      
+        if (filledInput) {
+          locationInputEl.push(locationEntry);
+          dialog.dialog("close");
+        }
+    }
+ 
+    dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 400,
+      width: 350,
+      modal: true,
+      buttons: {
+        "Pick Location": addLocation,
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        form[ 0 ].reset();
+        allFields.removeClass( "ui-state-error" );
+      }
+    });
+ 
+    form = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      addLocation();
+    });
+ 
+    $( "#pick-location" ).button().on( "click", function() {
+      dialog.dialog( "open" );
+    });
+  };
