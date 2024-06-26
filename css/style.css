@@ -1,26 +1,37 @@
-#map {
-    height: 100%;
-  }
+/* CSS for the map and other content */
 
 html,
 body {
-    height: 50%;
-    width: 50%;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
-  }
-
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background-color: #000;
-  color: #fff;
-  text-align: center;
+    overflow: hidden; /* Prevent scrollbars */
 }
 
-  header {
-    background: #1a1a1a;
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: transparent; /* Ensure transparency to show the map */
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Keep the map at the lowest layer */
+}
+
+header {
+    background: rgba(26, 26, 26, 0.8); /* Semi-transparent to see the map */
     padding: 20px 0;
+    z-index: 1; /* Ensure header is above the map */
+    position: relative;
 }
 
 header h1 {
@@ -28,14 +39,18 @@ header h1 {
 }
 
 nav {
-    background: #333;
+    background: rgba(51, 51, 51, 0.8); /* Semi-transparent to see the map */
     padding: 10px 0;
+    z-index: 1; /* Ensure nav is above the map */
+    position: relative;
 }
 
 nav ul {
     list-style: none;
     display: flex;
     justify-content: center;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul li {
@@ -54,6 +69,9 @@ nav ul li a:hover {
 
 main {
     padding: 20px;
+    z-index: 1; /* Ensure main content is above the map */
+    position: relative;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent to see the map */
 }
 
 section {
@@ -66,9 +84,10 @@ section h2 {
 }
 
 footer {
-    background: #1a1a1a;
+    background: rgba(26, 26, 26, 0.8); /* Semi-transparent to see the map */
     padding: 10px 0;
-    position: fixed;
+    position: relative;
     width: 100%;
     bottom: 0;
-}  
+    z-index: 1; /* Ensure footer is above the map */
+}
