@@ -1,13 +1,12 @@
-#map {
-    height: 100%;
-  }
+/* CSS for the map and other content */
 
 html,
 body {
-    height: 50%;
-    width: 50%;
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
+modal_form
   }
 
   label, input { display:block; }
@@ -19,3 +18,89 @@ body {
   div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
   .ui-dialog .ui-state-error { padding: .3em; }
   .validateTips { border: 1px solid transparent; padding: 0.3em; }
+=======
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: transparent; /* Ensure transparency to show the map */
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Keep the map at the lowest layer */
+}
+
+header {
+    background: rgba(26, 26, 26, 0.8); /* Semi-transparent to see the map */
+    padding: 20px 0;
+    z-index: 1; /* Ensure header is above the map */
+    position: relative;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+nav {
+    background: rgba(51, 51, 51, 0.8); /* Semi-transparent to see the map */
+    padding: 10px 0;
+    z-index: 1; /* Ensure nav is above the map */
+    position: relative;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+    z-index: 1; /* Ensure main content is above the map */
+    position: relative;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent to see the map */
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+section h2 {
+    margin-bottom: 10px;
+    color: #f39c12;
+}
+
+footer {
+    background: rgba(26, 26, 26, 0.8); /* Semi-transparent to see the map */
+    padding: 10px 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    z-index: 1; /* Ensure footer is above the map */
+}

@@ -47,6 +47,8 @@ async function initMap() {
   
   initMap();
 
+ modal_form
+
   function handleAddLocation(event){
 
     var dialog, form,
