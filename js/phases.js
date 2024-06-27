@@ -23,6 +23,24 @@ async function getMoonPhases() {
     }
 }
 
+async function getMoonPhaseImage() {
+    const url = 'https://api.astronomyapi.com/api/v2/studio/moon-phase';
+    const body = {
+        format: "png",
+        style: {
+            moonStyle: "sketch",
+            backgroundStyle: "stars",
+            backgroundColor: "red",
+            headingColor: "white",
+            textColor: "red"
+        },
+        observer: {
+            lattitude: 35.2164,
+            longitude: -80.954,
+        }
+    }
+}
+
 function displayMoonPhases(data) {
     const phases = data.data.phenomena.next;
     const moonPhaseContainer = document.getElementById('moon-phases');
