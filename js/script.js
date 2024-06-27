@@ -1,6 +1,8 @@
 let locationHistory = [];
 let currentLocation = {};
 let locationInputEl = [];
+let latitude = 0;
+let longitude = 0;
 
 async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
@@ -29,12 +31,12 @@ async function initMap() {
 
       let newClickLat = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2);
       console.log(newClickLat);
-      // console.log(Object.values(clickHistory[0]));
 
       let locationData = newClickLat.match(/-?\d+/g);
       let latitudeData = locationData[0]+'.'+locationData[1];
       let longitudeData = locationData[2]+'.'+locationData[3];
-
+      latitude = latitudeData;
+      longitude = longitudeData;
       let clickLocation = {
         lat: latitudeData,
         lng: longitudeData,
@@ -42,6 +44,9 @@ async function initMap() {
       locationHistory.push(clickLocation);
       let currentLocation = clickLocation;
       console.log(currentLocation);
+      console.log(latitude);
+      console.log(longitude);
+    
     });
   }
   
