@@ -17,19 +17,20 @@ h1 {
     text-shadow: 2px 2px 4px #000000;
 }
 
-#moon-phases {
+#moon-phases, #next-moon-phases {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(255, 255, 225, 0.1);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 4ppx 8px rgb(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     max-width: 600px;
     width: 100%;
+    margin-bottom: 20px; /* Add space between sections */
 }
 
-#moon-phases div {
+#moon-phases div, #next-moon-phases div {
     background: rgba(0, 0, 0, 0.7);
     border: 1px solid #415a77;
     border-radius: 10px;
@@ -40,12 +41,12 @@ h1 {
     text-align: center;
 }
 
-#moon-phases div p {
+#moon-phases div p, #next-moon-phases div p {
     margin: 5px 0;
     font-size: 1.2rem;
 }
 
-#moon-phases div p strong {
+#moon-phases div p strong, #next-moon-phases div p strong {
     color: #00aaff;
     font-size: 1.4rem;
 }
@@ -55,15 +56,15 @@ h1 {
         font-size: 2rem;
     }
     
-    #moon-phases {
+    #moon-phases, #next-moon-phases {
         padding: 15px;
     }
 
-    #moon-phases div p {
+    #moon-phases div p, #next-moon-phases div p {
         font-size: 1rem;
     }
 
-    #moon-phases div p strong {
+    #moon-phases div p strong, #next-moon-phases div p strong {
         font-size: 1.2rem;
     }
 }
