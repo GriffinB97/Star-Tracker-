@@ -5,7 +5,8 @@ $(function () {
   let locationInputEl = [];
   let latitudeMapInputEl = 0;
   let longitudeMapInputEl = 0;
-  
+
+
   async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
     const myLatlng = { lat: 35.2164, lng: -80.954 };
@@ -35,8 +36,8 @@ $(function () {
       console.log(newClickLat);
 
       let locationData = newClickLat.match(/-?\d+/g);
-      let latitudeData = locationData[0]+'.'+locationData[1];
-      let longitudeData = locationData[2]+'.'+locationData[3];
+      let latitudeData = locationData[0] + '.' + locationData[1];
+      let longitudeData = locationData[2] + '.' + locationData[3];
       latitudeMapInputEl = latitudeData;
       longitudeMapInputEl = longitudeData;
 
@@ -47,65 +48,74 @@ $(function () {
       locationHistory.push(clickLocation);
       currentLocation = clickLocation;
       console.log(longitudeMapInputEl);
-      
+
       document.querySelector('#latitude').value = latitudeMapInputEl;
       document.querySelector('#longitude').value = longitudeMapInputEl;
-    
     });
   }
 
   initMap();
 
-    var dialog, form,
+  var dialog, form,
 
-      latitude = $("#latitude"),
-      longitude = $("#longitude"),
-      date = $("#date"),
-      allFields = $([]).add(latitude).add(longitude).add(date);
+    latitude = $("#latitude"),
+    longitude = $("#longitude"),
+    date = $("#date"),
+    allFields = $([]).add(latitude).add(longitude).add(date);
 
 
-    function addLocation() {
-      let filledInput = true;
+  function addLocation() {
+    let filledInput = true;
 
-      let locationEntry = {
-        latitude: $('#latitude').val(),
-        longitude: $('#longitude').val(),
-        date: $('#date').val(),
-      };
+    let locationEntry = {
+      latitude: $('#latitude').val(),
+      longitude: $('#longitude').val(),
+      date: $('#date').val(),
+    };
 
-      $('#latitude').value = '';
-      $('longitude').value = '';
-      $('#date').value = '';
-
-      if (filledInput) {
-        locationInputEl.push(locationEntry);
-        dialog.dialog("close");
-      }
+    if (($('#latitude').val() === "") || ($('#longitude').val() === "") || ($('#date').val() === "" )){
+      alert("Please make sure all fields are filled in.");
+      filledInput = false;
+    }
+    else {
+      filledInput = true;
     }
 
-    dialog = $("#dialog-form").dialog({
-      autoOpen: false,
-      height: 400,
-      width: 350,
-      modal: true,
-      buttons: {
-        "Pick Location": addLocation,
-        Cancel: function () {
-          dialog.dialog("close");
-        }
-      },
-      close: function () {
-        form[0].reset();
-        allFields.removeClass("ui-state-error");
+    $('#latitude').value = '';
+    $('longitude').value = '';
+    $('#date').value = '';
+
+    if (filledInput) {
+      localStorage.setItem('locationInfo', JSON.stringify(locationEntry));
+      locationInputEl.push(locationEntry);
+      dialog.dialog("close");
+      location.href = "phases.html"
+    }
+  }
+
+  dialog = $("#dialog-form").dialog({
+    autoOpen: false,
+    height: 400,
+    width: 350,
+    modal: true,
+    buttons: {
+      "Pick Location": addLocation,
+      Cancel: function () {
+        dialog.dialog("close");
       }
-    });
-
-    form = dialog.find("form").on("submit", function (event) {
-      event.preventDefault();
-      addLocation();
-    });
-
-    $("#pick-location").button().on("click", function () {
-      dialog.dialog("open");
-    });
+    },
+    close: function () {
+      form[0].reset();
+      allFields.removeClass("ui-state-error");
+    }
   });
+
+  form = dialog.find("form").on("submit", function (event) {
+    event.preventDefault();
+    addLocation();
+  });
+
+  $("#pick-location").button().on("click", function () {
+    dialog.dialog("open");
+  });
+});
