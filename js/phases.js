@@ -23,9 +23,58 @@ async function getMoonPhases() {
     }
 }
 
+async function getMoonPhaseImage() {
+    const dateInput = document.getElementById('date-input').value;
+    if (!dateInput) {
+        alert('Please select a date.');
+        return;
+    }
+
+    const url = 'https://api.astronomyapi.com/api/v2/studio/moon-phase';
+    const body = {
+        format: "png",
+        style: {
+            moonStyle: "sketch",
+            backgroundStyle: "stars",
+            backgroundColor: "red",
+            headingColor: "white",
+            textColor: "red"
+        },
+        observer: {
+            latitude: 6.56774,
+            longitude: 79.88956,
+            date: dateInput
+        },
+        view: {
+            type: "portrait-simple",
+            orientation: "south-up"
+        }
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Basic ${btoa(`${appId}:${appSecret}`)}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok'); 
+        }
+
+        const data = await response.json();
+        displayMoonPhaseImage(data);
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+}
+
 function displayMoonPhases(data) {
     const phases = data.data.phenomena.next;
-    const moonPhaseContainer = document.getElementById('moon-phases');
+    const moonPhaseContainer = document.getElementById('moon-phases-list');
 
     phases.forEach(phase => {
         const phaseElement = document.createElement('div');
@@ -37,3 +86,16 @@ function displayMoonPhases(data) {
         moonPhaseContainer.appendChild(phaseElement);
     });
 }
+
+function displayMoonPhaseImage(data) {
+    const imageUrl = data.data.imageUrl;
+    const moonPhaseImageContainer = document.getElementById('moon-phase-image');
+
+    moonPhaseImageContainer.innerHTML = ''; // Clear previous image
+    const imgElement = document.createElement('img');
+    imgElement.src = imageUrl;
+    imgElement.alt = 'Moon Phase Image';
+    moonPhaseImageContainer.appendChild(imgElement);
+}
+
+getMoonPhases();

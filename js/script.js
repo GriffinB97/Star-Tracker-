@@ -1,8 +1,12 @@
-let locationHistory = [];
-let currentLocation = {};
-let locationInputEl = [];
+$(function () {
 
-async function initMap() {
+  let locationHistory = [];
+  let currentLocation = {};
+  let locationInputEl = [];
+  let latitude = 0;
+  let longitude = 0;
+  
+  async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
     const myLatlng = { lat: 35.2164, lng: -80.954 };
     const map = new google.maps.Map(document.getElementById("map"), {
@@ -15,7 +19,7 @@ async function initMap() {
     });
 
     console.log(myLatlng);
-  
+
     infoWindow.open(map);
     map.addListener("click", (mapsMouseEvent) => {
       infoWindow.close();
@@ -29,11 +33,12 @@ async function initMap() {
 
       let newClickLat = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2);
       console.log(newClickLat);
-      // console.log(Object.values(clickHistory[0]));
 
       let locationData = newClickLat.match(/-?\d+/g);
       let latitudeData = locationData[0]+'.'+locationData[1];
       let longitudeData = locationData[2]+'.'+locationData[3];
+      latitude = latitudeData;
+      longitude = longitudeData;
 
       let clickLocation = {
         lat: latitudeData,
@@ -42,65 +47,64 @@ async function initMap() {
       locationHistory.push(clickLocation);
       let currentLocation = clickLocation;
       console.log(currentLocation);
+      console.log(latitude);
+      console.log(longitude);
+    
     });
   }
-  
+
   initMap();
 
- modal_form
-
-  function handleAddLocation(event){
-
     var dialog, form,
- 
+
       latitude = $("#latitude"),
       longitude = $("#longitude"),
-      date = $( "#date" ),
-      allFields = $( [] ).add( latitude ).add( longitude ).add( date );
- 
- 
-    function addLocation() {
-        let filledInput = true;
+      date = $("#date"),
+      allFields = $([]).add(latitude).add(longitude).add(date);
 
-        let locationEntry = {
-            latitude: $('#latitude').val(),
-            longitude: $('#longitude').val(),
-            date: $('#date').val(),
-        };
-        
-        $('#latitude').value = '';
-        $('longitude').value ='';
-        $('#date').value ='';
-      
-        if (filledInput) {
-          locationInputEl.push(locationEntry);
-          dialog.dialog("close");
-        }
+
+    function addLocation() {
+      let filledInput = true;
+
+      let locationEntry = {
+        latitude: $('#latitude').val(),
+        longitude: $('#longitude').val(),
+        date: $('#date').val(),
+      };
+
+      $('#latitude').value = '';
+      $('longitude').value = '';
+      $('#date').value = '';
+
+      if (filledInput) {
+        locationInputEl.push(locationEntry);
+        dialog.dialog("close");
+      }
     }
- 
-    dialog = $( "#dialog-form" ).dialog({
+
+    dialog = $("#dialog-form").dialog({
       autoOpen: false,
       height: 400,
       width: 350,
       modal: true,
       buttons: {
         "Pick Location": addLocation,
-        Cancel: function() {
-          dialog.dialog( "close" );
+        Cancel: function () {
+          dialog.dialog("close");
         }
       },
-      close: function() {
-        form[ 0 ].reset();
-        allFields.removeClass( "ui-state-error" );
+      close: function () {
+        form[0].reset();
+        allFields.removeClass("ui-state-error");
       }
     });
- 
-    form = dialog.find( "form" ).on( "submit", function( event ) {
+
+    form = dialog.find("form").on("submit", function (event) {
       event.preventDefault();
       addLocation();
     });
- 
-    $( "#pick-location" ).button().on( "click", function() {
-      dialog.dialog( "open" );
+
+    $("#pick-location").button().on("click", function () {
+      dialog.dialog("open");
     });
-  };
+  });
