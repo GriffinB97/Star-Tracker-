@@ -3,7 +3,9 @@ $(function () {
   let locationHistory = [];
   let currentLocation = {};
   let locationInputEl = [];
-
+  let latitude = 0;
+  let longitude = 0;
+  
   async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
     const myLatlng = { lat: 35.2164, lng: -80.954 };
@@ -31,11 +33,12 @@ $(function () {
 
       let newClickLat = JSON.stringify(mapsMouseEvent.latLng.toJSON(), null, 2);
       console.log(newClickLat);
-      // console.log(Object.values(clickHistory[0]));
 
       let locationData = newClickLat.match(/-?\d+/g);
-      let latitudeData = locationData[0] + '.' + locationData[1];
-      let longitudeData = locationData[2] + '.' + locationData[3];
+      let latitudeData = locationData[0]+'.'+locationData[1];
+      let longitudeData = locationData[2]+'.'+locationData[3];
+      latitude = latitudeData;
+      longitude = longitudeData;
 
       let clickLocation = {
         lat: latitudeData,
@@ -44,6 +47,9 @@ $(function () {
       locationHistory.push(clickLocation);
       let currentLocation = clickLocation;
       console.log(currentLocation);
+      console.log(latitude);
+      console.log(longitude);
+    
     });
   }
 
