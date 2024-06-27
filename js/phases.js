@@ -91,7 +91,7 @@ function displayMoonPhaseImage(data) {
     const imageUrl = data.data.imageUrl;
     const moonPhaseImageContainer = document.getElementById('moon-phase-image');
 
-    moonPhaseImageContainer.innerHTML = ''; // Clear previous image
+    moonPhaseImageContainer.innerHTML = '';
     const imgElement = document.createElement('img');
     imgElement.src = imageUrl;
     imgElement.alt = 'Moon Phase Image';
