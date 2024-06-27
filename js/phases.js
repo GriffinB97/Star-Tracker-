@@ -37,5 +37,3 @@ function displayMoonPhases(data) {
         moonPhaseContainer.appendChild(phaseElement);
     });
 }
-
-getMoonPhases();
