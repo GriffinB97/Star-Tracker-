@@ -163,29 +163,33 @@ backButtonEl.addEventListener("click", function (event) {
 
 document.getElementById('next-moon-phase-button').addEventListener('click', getNextMoonPhase);
 
-getMoonPhases();
+// getMoonPhases();
 
 
 async function generateStarChart(date, latitude, longitude, style = 'default') {
-
+    console.log(latitude, longitude)
+    console.log(date)
     const url = 'https://api.astronomyapi.com/api/v2/studio/star-chart';
 
     const requestBody = {
-        style: style,
-        observer: {
-            latitude: latitude,
-            longitude: longitude,
-            date: date,
+        'style': 'navy',
+        'observer': {
+            // "latitude": 33.775867,
+            // "longitude": -84.39733,
+            'latitude': latitude,
+            'longitude': longitude,
+            'date': date,
         },
-        view: {
-            type: "area",
-            parameters: {
-                position:{
-                    equatorial: {
-                        rightAscension: 14.83,
-                        declination:-15.23,
+        'view': {
+            'type': "area",
+            'parameters': {
+                'position': {
+                    'equatorial': {
+                        'rightAscension': 14.83,
+                        'declination': -15.23,
                     }
-                }
+                },
+                "zoom": 2
             }
         }
     };
@@ -196,20 +200,20 @@ async function generateStarChart(date, latitude, longitude, style = 'default') {
             'Authorization': `Basic ${btoa(`${appId}:${appSecret}`)}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(requestBody)
+         body:JSON.stringify(requestBody)
     });
-
     if (response.ok) {
         const data = await response.json();
+        console.log(data)
         return data.data.imageUrl;
     } else {
         const errorData = await response.json();
         throw new Error(`Error: ${errorData.message}`);
     }
 
-    
+
 }
-document.getElementById('star-chart-form').addEventListener('submit', async function(e) {
+document.getElementById('star-chart-form').addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const date = document.getElementById('date').value;
@@ -225,10 +229,3 @@ document.getElementById('star-chart-form').addEventListener('submit', async func
 });
 // Usage example
 
-generateStarChart('2024-06-27', 40.7128, -74.0060)
-    .then(url => {
-        console.log('Star Chart URL:', url);
-    })
-    .catch(error => {
-        console.error('Error generating star chart:', error);
-    });
