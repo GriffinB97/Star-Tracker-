@@ -1,36 +1,84 @@
 body {
-    background: linear-gradient(90deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+    background: radial-gradient(circle at bottom, #0d1b2a, #1b263b, #415a77, #000000);
     color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png'), linear-gradient(90deg, #0d1b2a 0%, #1b263b 50%, #415a77 100%);
+    background-blend-mode: overlay;
+}
+
+main {
+    width: 90%;
+    max-width: 1000px;
+    text-align: center;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+h1, h2 {
+    text-shadow: 2px 2px 4px #000000;
+    margin: 20px 0;
 }
 
 h1 {
     font-size: 3rem;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px #000000;
 }
 
-#moon-phases {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.1);
+h2 {
+    font-size: 2rem;
+}
+
+section {
+    background: rgba(0, 0, 0, 0.5);
     border-radius: 15px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
+    margin: 20px auto;
+}
+
+section p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+section input, section button {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     margin-bottom: 20px;
 }
 
-#moon-phases div {
+section input {
+    background: #1b263b;
+    color: #ffffff;
+}
+
+section button {
+    background: #415a77;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+section button:hover {
+    background: #00aaff;
+}
+
+#moon-phases div, #next-moon-phase div {
     background: rgba(0, 0, 0, 0.7);
     border: 1px solid #415a77;
     border-radius: 10px;
@@ -41,62 +89,69 @@ h1 {
     text-align: center;
 }
 
-#moon-phases div p {
+#moon-phases div p, #next-moon-phase p {
     margin: 5px 0;
     font-size: 1.2rem;
 }
 
-#moon-phases div p strong {
+#moon-phases div p strong, #next-moon-phase p strong {
     color: #00aaff;
     font-size: 1.4rem;
 }
 
-#next-moon-phase {
+#back {
+    background: #415a77;
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 20px;
+}
+
+#back:hover {
+    background: #00aaff;
+}
+
+#star-chart-result img {
+    margin-top: 20px;
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    max-width: 600px;
-    width: 100%;
-    margin-bottom: 20px;
-    text-align: center;
 }
 
-#next-moon-phase p {
+form label, form input, form button {
     margin: 5px 0;
-    font-size: 1.2rem;
-}
-
-#next-moon-phase p strong {
-    color: #00aaff;
-    font-size: 1.4rem;
+    width: 100%;
+    max-width: 400px;
 }
 
 @media (max-width: 768px) {
     h1 {
         font-size: 2rem;
     }
-    
-    #moon-phases {
+
+    section {
         padding: 15px;
     }
 
-    #moon-phases div p {
+    section p {
         font-size: 1rem;
     }
 
-    #moon-phases div p strong {
-        font-size: 1.2rem;
+    section input, section button {
+        font-size: 0.9rem;
     }
 
-    #next-moon-phase p {
-        font-size: 1rem;
-    }
-
-    #next-moon-phase p strong {
+    #moon-phases div p strong, #next-moon-phase p strong {
         font-size: 1.2rem;
     }
 }

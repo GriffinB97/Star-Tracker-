@@ -6,7 +6,6 @@ $(function () {
   let latitudeMapInputEl = 0;
   let longitudeMapInputEl = 0;
 
-
   async function initMap() {
     const { Map } = await google.maps.importLibrary("maps");
     const myLatlng = { lat: 35.2164, lng: -80.954 };
@@ -19,7 +18,15 @@ $(function () {
       position: myLatlng,
     });
 
-    console.log(myLatlng);
+    navigator.geolocation.getCurrentPosition(function (location) {
+      $("#current-location").button().on("click", function () {
+        document.querySelector('#latitude').value = location.coords.latitude;
+        document.querySelector('#longitude').value = location.coords.longitude;
+      });
+
+    });
+
+
 
     infoWindow.open(map);
     map.addListener("click", (mapsMouseEvent) => {
@@ -47,7 +54,6 @@ $(function () {
       }
       locationHistory.push(clickLocation);
       currentLocation = clickLocation;
-      console.log(longitudeMapInputEl);
 
       document.querySelector('#latitude').value = latitudeMapInputEl;
       document.querySelector('#longitude').value = longitudeMapInputEl;
@@ -73,7 +79,7 @@ $(function () {
       date: $('#date').val(),
     };
 
-    if (($('#latitude').val() === "") || ($('#longitude').val() === "") || ($('#date').val() === "" )){
+    if (($('#latitude').val() === "") || ($('#longitude').val() === "") || ($('#date').val() === "")) {
       alert("Please make sure all fields are filled in.");
       filledInput = false;
     }
