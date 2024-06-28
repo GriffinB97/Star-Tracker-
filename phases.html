@@ -10,7 +10,6 @@
 <body>
     <main>
         <h1>Star Chart and Moon Phase</h1>
-        <button id= "back">Pick New location</button>
         <section id="constellations">
             <h2>Constellations</h2>
             <p>Learn about different constellations visible in the night sky.</p>
@@ -18,7 +17,7 @@
 
         <section id="moon-phases">
             <h2>Moon Phases</h2>
-            <div id="moon-phases-list"></div>
+            <!-- <div id="moon-phases-list"></div> -->
             <p>Check out the current phase of the moon.</p>
             <input type="date" id="date-input" />
             <button onclick="getMoonPhaseImage()">Get Moon Phase</button>
@@ -26,10 +25,13 @@
         </section>
 
         <section id="next-moon-phase">
-            <h2>Next Moon Phase</h2>
-            <button id="next-moon-phase-button">Get Next Moon Phase</button>
-            <div id="next-moon-phase-details"></div>
+            <h2>Compare Moon Phase</h2>
+            <input type="date" id="date-compare" />
+            <button onclick="getComparisonMoonPhaseImage()">Compare Moon Phase</button>
+            <div id="compare-moon-phase-image"></div>
         </section>
+
+        <button id= "back">Pick New location</button>
 
         <section id="sky-view">
             <h2>Current Sky View</h2>

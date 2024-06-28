@@ -56,7 +56,7 @@ async function getMoonPhaseImage() {
         observer: {
             latitude: 6.56774,
             longitude: 79.88956,
-            date: dateInput
+            date: dateInput,
         },
         view: {
             type: "portrait-simple",
@@ -84,22 +84,43 @@ async function getMoonPhaseImage() {
         console.error('Fetch error:', error);
     }
 }
-
-async function getNextMoonPhase() {
-    const dateInput = document.getElementById('date-input').value;
-    if (!dateInput) {
+//added this
+async function getComparisonMoonPhaseImage() {
+    const dateCompareInput = document.getElementById('date-compare').value;
+    if (!dateCompareInput) {
         alert('Please select a date.');
         return;
     }
 
-    const url = `https://api.astronomyapi.com/api/v2/studio/moon-phase?date=${dateInput}`;
+    const url = 'https://api.astronomyapi.com/api/v2/studio/moon-phase';
+    const body = {
+        format: "png",
+        style: {
+            moonStyle: "sketch",
+            backgroundStyle: "stars",
+            backgroundColor: "white",
+            headingColor: "white",
+            textColor: "white"
+        },
+        observer: {
+            latitude: 6.56774,
+            longitude: 79.88956,
+            date: dateCompareInput,
+        },
+        view: {
+            type: "portrait-simple",
+            orientation: "south-up"
+        }
+    };
 
     try {
         const response = await fetch(url, {
-            method: 'GET',
+            method: 'POST',
             headers: {
-                'Authorization': `Basic ${btoa(`${appId}:${appSecret}`)}`
-            }
+                'Authorization': `Basic ${btoa(`${appId}:${appSecret}`)}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
         });
 
         if (!response.ok) {
@@ -107,7 +128,7 @@ async function getNextMoonPhase() {
         }
 
         const data = await response.json();
-        displayNextMoonPhase(data);
+        displayCompareMoonPhase(data);
     } catch (error) {
         console.error('Fetch error:', error);
     }
@@ -139,29 +160,20 @@ function displayMoonPhaseImage(data) {
     moonPhaseImageContainer.appendChild(imgElement);
 }
 
-function displayNextMoonPhase(data) {
-    const nextPhases = data.data.phenomena.next;
-    const nextPhaseContainer = document.getElementById('next-moon-phase-details');
+function displayCompareMoonPhase(data) {
+    const imageUrl = data.data.imageUrl;
+    const moonPhaseImageContainer = document.getElementById('compare-moon-phase-image');
 
-    const nextRelevantPhase = nextPhases.find(phase =>
-        ['First Quarter', 'Full Moon', 'Last Quarter'].includes(phase.name)
-    );
-
-    if (nextRelevantPhase) {
-        nextPhaseContainer.innerHTML = `
-            <p><strong>${nextRelevantPhase.name}</strong></p>
-            <p>Date: ${new Date(nextRelevantPhase.date).toDateString()}</p>
-        `;
-    } else {
-        nextPhaseContainer.innerHTML = '<p>No relevant moon phases found in the near future.</p>';
-    }
+    moonPhaseImageContainer.innerHTML = '';
+    const imgElement = document.createElement('img');
+    imgElement.src = imageUrl;
+    imgElement.alt = 'Moon Phase Image';
+    moonPhaseImageContainer.appendChild(imgElement);
 }
 
 backButtonEl.addEventListener("click", function (event) {
     location.href = "index.html";
 })
-
-document.getElementById('next-moon-phase-button').addEventListener('click', getNextMoonPhase);
 
 getMoonPhases();
 
