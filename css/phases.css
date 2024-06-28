@@ -65,6 +65,17 @@ h1 {
     text-align: center;
 }
 
+#next-moon-phase div {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #415a77;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 15px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
 #next-moon-phase p {
     margin: 5px 0;
     font-size: 1.2rem;
