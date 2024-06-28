@@ -175,7 +175,6 @@ backButtonEl.addEventListener("click", function (event) {
     location.href = "index.html";
 })
 
-
 async function generateStarChart(date, latitude, longitude, style = 'default') {
 
     const url = 'https://api.astronomyapi.com/api/v2/studio/star-chart';
