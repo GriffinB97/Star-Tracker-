@@ -84,7 +84,7 @@ async function getMoonPhaseImage() {
         console.error('Fetch error:', error);
     }
 }
-
+//added this
 async function getComparisonMoonPhaseImage() {
     const dateCompareInput = document.getElementById('date-compare').value;
     if (!dateCompareInput) {
