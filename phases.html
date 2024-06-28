@@ -19,6 +19,7 @@
         <section id="moon-phases">
             <h2>Moon Phases</h2>
             <div id="moon-phases-list"></div>
+            <!-- <div id="moon-phases-list"></div> -->
             <p>Check out the current phase of the moon.</p>
             <input type="date" id="date-input" />
             <button onclick="getMoonPhaseImage()">Get Moon Phase</button>
@@ -29,7 +30,13 @@
             <h2>Next Moon Phase</h2>
             <button id="next-moon-phase-button">Get Next Moon Phase</button>
             <div id="next-moon-phase-details"></div>
+            <h2>Compare Moon Phase</h2>
+            <input type="date" id="date-compare" />
+            <button onclick="getComparisonMoonPhaseImage()">Compare Moon Phase</button>
+            <div id="compare-moon-phase-image"></div>
         </section>
+
+        <button id= "back">Pick New location</button>
 
         <section id="sky-view">
             <h2>Current Sky View</h2>
@@ -46,9 +53,7 @@
             <button type="submit">Generate Star Chart</button>
         </form>
         <div id="star-chart-result"></div>
-
     </main>
-
     <script src="./js/phases.js"></script>
 </body>
 </html>

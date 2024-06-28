@@ -65,16 +65,25 @@ h1 {
     text-align: center;
 }
 
+#next-moon-phase div {
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid #415a77;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 15px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
 #next-moon-phase p {
     margin: 5px 0;
     font-size: 1.2rem;
 }
-
 #next-moon-phase p strong {
     color: #00aaff;
     font-size: 1.4rem;
 }
-
 @media (max-width: 768px) {
     h1 {
         font-size: 2rem;
@@ -83,19 +92,15 @@ h1 {
     #moon-phases {
         padding: 15px;
     }
-
     #moon-phases div p {
         font-size: 1rem;
     }
-
     #moon-phases div p strong {
         font-size: 1.2rem;
     }
-
     #next-moon-phase p {
         font-size: 1rem;
     }
-
     #next-moon-phase p strong {
         font-size: 1.2rem;
     }
