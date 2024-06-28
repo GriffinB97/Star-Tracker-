@@ -152,3 +152,71 @@ location.href = "index.html";
 document.getElementById('next-moon-phase-button').addEventListener('click', getNextMoonPhase);
 
 getMoonPhases();
+
+
+async function generateStarChart(date, latitude, longitude, style = 'default') {
+
+    const url = 'https://api.astronomyapi.com/api/v2/studio/star-chart';
+
+    const requestBody = {
+        style: style,
+        observer: {
+            latitude: latitude,
+            longitude: longitude,
+            date: date
+        },
+        view: {
+            type: "area",
+            parameters: {
+                position:{
+                    equatorial: {
+                        rightAscension: 14.83,
+                        declination:-15.23,
+                    }
+                }
+            }
+        }
+    };
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Basic ${btoa(`${appId}:${appSecret}`)}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        return data.data.imageUrl;
+    } else {
+        const errorData = await response.json();
+        throw new Error(`Error: ${errorData.message}`);
+    }
+
+    
+}
+document.getElementById('star-chart-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const date = document.getElementById('date').value;
+    const latitude = parseFloat(document.getElementById('latitude').value);
+    const longitude = parseFloat(document.getElementById('longitude').value);
+
+    try {
+        const url = await generateStarChart(date, latitude, longitude);
+        document.getElementById('star-chart-result').innerHTML = `<h2>Star Chart</h2><img src="${url}" alt="Star Chart">`;
+    } catch (error) {
+        document.getElementById('star-chart-result').innerHTML = `<p>Error: ${error.message}</p>`;
+    }
+});
+// Usage example
+
+generateStarChart('2024-06-27', 40.7128, -74.0060)
+    .then(url => {
+        console.log('Star Chart URL:', url);
+    })
+    .catch(error => {
+        console.error('Error generating star chart:', error);
+    });
