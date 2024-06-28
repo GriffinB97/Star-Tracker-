@@ -9,6 +9,11 @@ let latitudeData = Number(storedLocation.latitude);
 let longitudeData = Number(storedLocation.longitude);
 let dateData = storedLocation.date
 
+document.querySelector('#date-input').value = dateData;
+document.querySelector('#date').value = dateData;
+document.querySelector('#latitude').value = latitudeData;
+document.querySelector('#longitude').value = longitudeData;
+
 async function getMoonPhases() {
     const url = 'https://api.astronomyapi.com/api/v2/studio/moon-phase';
 
