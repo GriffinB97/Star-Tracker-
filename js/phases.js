@@ -54,8 +54,8 @@ async function getMoonPhaseImage() {
             textColor: "white"
         },
         observer: {
-            latitude: 6.56774,
-            longitude: 79.88956,
+            latitude: parseFloat(latitudeData),
+            longitude: parseFloat(longitudeData),
             date: dateInput,
         },
         view: {
@@ -103,8 +103,8 @@ async function getComparisonMoonPhaseImage() {
             textColor: "white"
         },
         observer: {
-            latitude: 6.56774,
-            longitude: 79.88956,
+            latitude: parseFloat(latitudeData),
+            longitude: parseFloat(longitudeData),
             date: dateCompareInput,
         },
         view: {
