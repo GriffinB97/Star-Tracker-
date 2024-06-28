@@ -175,8 +175,6 @@ backButtonEl.addEventListener("click", function (event) {
     location.href = "index.html";
 })
 
-getMoonPhases();
-
 
 async function generateStarChart(date, latitude, longitude, style = 'default') {
 
