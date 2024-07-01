@@ -2,8 +2,19 @@ const appId = 'dde7350d-cc80-4a05-abd8-f9b38d47f0f4';
 const appSecret = '6509d5ba73f09bc90884cbdde850b5884167e2fe0c7ce02e8aa60592ee8b80b15e606316c02a21ef04206d048aeccffffd5b937004c199111720042b90a62990ffa480ac7aab0102d31a9a253d3d0e87b4c0667756791ad88428fe4b4074915269205c39d493bee8ded062334449e870';
 const backButtonEl = document.querySelector('#back');
 
+function readFromLocalStorage () {
+    let localData = JSON.parse(localStorage.getItem('locationInfo'));
+    if (!localData) {
+        localData = {
+            latitude: 35.2164,
+            longitude: -80.954,
+        }
+        localStorage.setItem('locationInfo', JSON.stringify(localData));
+    }
+    return localData;
+}
+readFromLocalStorage();
 const storedLocation = JSON.parse(localStorage.getItem('locationInfo'));
-console.log(storedLocation)
 
 let latitudeData = Number(storedLocation.latitude);
 let longitudeData = Number(storedLocation.longitude);
